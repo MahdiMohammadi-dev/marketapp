@@ -1,5 +1,6 @@
 class ScreenName {
   ScreenName._();
   static const root = "/";
-  static const introScreen = "/introScreen";
+  static const introMainWrapper = "/introMainWrapper";
+  static const homeScreen = "/homeScreen";
 }

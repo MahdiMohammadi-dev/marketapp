@@ -93,10 +93,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> goToHomePage() {
     return Future.delayed(const Duration(seconds: 3), () {
-      CustomSnackBar.showsnack(context, 'وارد شدید', Colors.green);
+      // CustomSnackBar.showsnack(context, 'وارد شدید', Colors.green);
       Navigator.pushNamed(
         context,
-        ScreenName.introScreen,
+        ScreenName.introMainWrapper,
       );
     });
   }
