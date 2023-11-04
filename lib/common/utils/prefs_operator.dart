@@ -1,13 +1,11 @@
-
+import 'package:marketapp/locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../locator.dart';
 
 class PrefsOperator {
   late SharedPreferences sharedPreferences;
   PrefsOperator() {
     sharedPreferences = locator<SharedPreferences>();
   }
-
 
   saveUserData(token, userName, mobile) async {
     sharedPreferences.setString("user_token", token);
@@ -37,5 +35,4 @@ class PrefsOperator {
     sharedPreferences.clear();
     sharedPreferences.setBool("showIntro", false);
   }
-
 }

@@ -1,11 +1,13 @@
 import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketapp/common/utils/prefs_operator.dart';
 import 'package:marketapp/feature/features_intro/presentation/bloc/intro_cubit/cubit/intro_cubit.dart';
 import 'package:marketapp/feature/features_intro/presentation/screens/routes/screen_name.dart';
 import 'package:marketapp/feature/features_intro/presentation/widgets/get_start_btn.dart';
 import 'package:marketapp/feature/features_intro/presentation/widgets/intro_page.dart';
 import 'package:marketapp/gen/assets.gen.dart';
+import 'package:marketapp/locator.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroMainWrapper extends StatelessWidget {
@@ -83,6 +85,8 @@ class IntroMainWrapper extends StatelessWidget {
                         return GetStartBtn(
                             text: 'شروع کنید',
                             onTap: () {
+                              PrefsOperator prefsOperator = locator();
+                              prefsOperator.changeIntroState();
                               Navigator.pushNamedAndRemoveUntil(
                                   context,
                                   ScreenName.homeScreen,

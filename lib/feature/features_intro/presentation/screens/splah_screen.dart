@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:marketapp/common/utils/custom_snackbar.dart';
+import 'package:marketapp/common/utils/prefs_operator.dart';
 import 'package:marketapp/feature/features_intro/presentation/bloc/splash_cubit/splash_cubit.dart';
 import 'package:marketapp/feature/features_intro/presentation/screens/routes/screen_name.dart';
 import 'package:marketapp/gen/assets.gen.dart';
+import 'package:marketapp/locator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -91,13 +93,20 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  Future<void> goToHomePage() {
+  Future<void> goToHomePage() async {
+    PrefsOperator prefsOperator = locator();
+    var shouldShowIntro = await prefsOperator.getIntroState();
     return Future.delayed(const Duration(seconds: 3), () {
-      // CustomSnackBar.showsnack(context, 'وارد شدید', Colors.green);
-      Navigator.pushNamed(
-        context,
-        ScreenName.introMainWrapper,
-      );
+      if (shouldShowIntro) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          ScreenName.introMainWrapper,
+          ModalRoute.withName(ScreenName.introMainWrapper),
+        );
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, ScreenName.homeScreen,
+            ModalRoute.withName(ScreenName.homeScreen));
+      }
     });
   }
 }
